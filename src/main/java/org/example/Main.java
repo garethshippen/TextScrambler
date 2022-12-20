@@ -3,18 +3,16 @@ package org.example;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class Main {
-    final static String alphabet = "abcdefghijklmnopqrstuvwxyz";
     public static void main(String[] args) throws URISyntaxException {
-//        File source = getFile("plaintext.txt");
-//        File sink = getFile("cyphertext1.txt");
-//        createRotText(source, sink, 10);
-//        System.out.println("Finished.");
-//
-        System.out.println(createRandomCypher());
+        File source = getFile("plaintext.txt");
+        File sink = getFile("cyphertext.txt");
+        createRandomText(source, sink);
+        System.out.println("Finished.");
+//        RandomCypher cypher = new RandomCypher();
+//        System.out.println(cypher.getCypher());
+        //TODO bug on first letter of line of plaintext not swapping
     }
     private static char rotateChar(char _c, int offset)
     {
@@ -26,12 +24,6 @@ public class Main {
     private static char rotateChar(char _c)
     {
         return rotateChar(_c, 13);
-    }
-
-    private static char swapChar(String _cypher, char c)
-    {
-
-        return 'c';
     }
 
     private static File getFile(String _fileName) throws URISyntaxException {
@@ -64,13 +56,12 @@ public class Main {
             while((red = reader.read()) != -1)
             {
                 character = Character.toLowerCase((char) red);
-                red = (int)character;
                 //a = 97
                 //z = 122
                 if(red > 96 && red < 123) {
                     character = rotateChar(character, _offset);
                 }
-                writer.write((int)character);
+                writer.write(character);
 
             }
             reader.close();
@@ -81,9 +72,34 @@ public class Main {
             System.out.println(e.getMessage());
         }
     }
-    private static void createRandomText()
+    private static void createRandomText(File _file, File _output)
     {
-
+        RandomCypher cypher = new RandomCypher();
+        BufferedReader reader;
+        BufferedWriter writer;
+        try
+        {
+            reader = new BufferedReader(new FileReader(_file));
+            writer = new BufferedWriter(new FileWriter(_output));
+            int red;
+            char character;
+            while((red = reader.read()) != -1)
+            {
+                character = Character.toLowerCase((char) red);
+                //a = 97
+                //z = 122
+                if(red > 96 && red < 123) {
+                    character = cypher.swapChar(character);
+                }
+                writer.write(character);
+            }
+            reader.close();
+            writer.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 
 }
