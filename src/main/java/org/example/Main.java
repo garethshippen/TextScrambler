@@ -7,9 +7,9 @@ import java.net.URL;
 public class Main {
     public static void main(String[] args) throws URISyntaxException {
         File source = getFile("plaintext.txt");
-        File sink = getFile("cyphertext.txt");
+        File sink = getFile("cyphertext1.txt");
 
-        createCypherText(source, sink);
+        createCypherText(source, sink, 10);
         System.out.println("Finished.");
     }
     private static char swapChar(char _c, int offset)
@@ -39,6 +39,10 @@ public class Main {
 
     private static void createCypherText(File _file, File _output)
     {
+        createCypherText(_file, _output, 13);
+    }
+    private static void createCypherText(File _file, File _output, int _offset)
+    {
         BufferedReader reader;
         BufferedWriter writer;
         try
@@ -54,7 +58,7 @@ public class Main {
                 //a = 97
                 //z = 122
                 if(red > 96 && red < 123) {
-                    character = swapChar(character);
+                    character = swapChar(character, _offset);
                 }
                 writer.write((int)character);
 
