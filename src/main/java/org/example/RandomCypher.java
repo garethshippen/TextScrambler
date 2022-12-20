@@ -11,11 +11,16 @@ public class RandomCypher
     public RandomCypher()
     {
         cypher = createRandomCypher();
+        System.out.println(cypher);
     }
 
     public char swapChar(char _c)
     {
         return cypher.charAt(alphabet.indexOf(_c));
+    }
+    public String getCypher()
+    {
+        return cypher;
     }
     private String createRandomCypher()
     {
@@ -26,6 +31,12 @@ public class RandomCypher
         }
         Collections.shuffle(letters);
 
-        return letters.toString();
+        StringBuilder random = new StringBuilder();
+        int length = letters.size();
+        for(int i = 0; i < length; i++)
+        {
+            random.append(letters.get(i));
+        }
+        return random.toString();
     }
 }
