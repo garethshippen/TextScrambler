@@ -11,7 +11,6 @@ public class RandomCypher
     public RandomCypher()
     {
         cypher = createRandomCypher();
-        System.out.println(cypher);
     }
 
     public char swapChar(char _c)
