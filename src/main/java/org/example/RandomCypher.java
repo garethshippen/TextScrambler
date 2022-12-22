@@ -16,7 +16,12 @@ public class RandomCypher
 
     public char swapChar(char _c)
     {
-        return cypher.charAt(alphabet.indexOf(_c));
+        char c = _c;
+        if(alphabet.indexOf(_c) >= 0)
+        {
+            c = cypher.charAt(alphabet.indexOf(_c));
+        }
+        return c;
     }
     public String getCypher()
     {

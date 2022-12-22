@@ -10,9 +10,17 @@ public class Main {
         File sink = getFile("cyphertext.txt");
         createRandomText(source, sink);
         System.out.println("Finished.");
-//        RandomCypher cypher = new RandomCypher();
-//        System.out.println(cypher.getCypher());
-        //TODO bug on first letter of line of plaintext not swapping
+
+        //TODO bug on first letter of line of plaintext not swapping. It's to do with the case
+
+//        String test = "hello\nmy name is gareth";
+//        String test1 = "";
+//        for(int i = 0; i < test.length(); i++)
+//        {
+//            test1 = test1 + cypher.swapChar(test.charAt(i));
+//        }
+//        System.out.println(test);
+//        System.out.println(test1);
     }
     private static char rotateChar(char _c, int offset)
     {
@@ -88,7 +96,7 @@ public class Main {
                 character = Character.toLowerCase((char) red);
                 //a = 97
                 //z = 122
-                if(red > 96 && red < 123) {
+                if((int)character > 96 && (int)character < 123) {
                     character = cypher.swapChar(character);
                 }
                 writer.write(character);
